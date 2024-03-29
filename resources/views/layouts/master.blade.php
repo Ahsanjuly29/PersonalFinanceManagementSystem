@@ -12,7 +12,7 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/theme/favicon.svg') }}" />
     <!-- Template CSS -->
     <link href="{{ asset('assets/css/main.css?v=1.1') }}" rel="stylesheet" type="text/css" />
 
@@ -24,7 +24,7 @@
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="index.html" class="brand-wrap">
-                <img src="assets/imgs/theme/logo.svg" class="logo" alt="Nest Dashboard" />
+                <img src="{{ asset('assets/imgs/theme/logo.svg') }}" class="logo" alt="Nest Dashboard" />
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"><i
@@ -41,8 +41,21 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i> <span
-                            class="text">Seller</span> </a>
+                    <a class="menu-link" href="{{ route('blade.seller.index') }}">
+                        <i class="icon material-icons md-store"></i>
+                        <span class="text">
+                            Seller
+                        </span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="menu-link" href="{{ route('blade.customer.index') }}">
+                        <i class="icon material-icons md-store"></i>
+                        <span class="text">
+                            Customer
+                        </span>
+                    </a>
                 </li>
                 {{-- <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-products-list.html">
@@ -169,21 +182,25 @@
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
                             aria-expanded="false"><i class="material-icons md-public"></i></a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png"
-                                    alt="English" />English</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png"
-                                    alt="Français" />Français</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png"
-                                    alt="Français" />日本語</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png"
-                                    alt="Français" />中国人</a>
+                            <a class="dropdown-item text-brand" href="#">
+                                <img src="{{ asset('assets/imgs/theme/flag-us.png') }}" alt="English" />
+                                English
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <img src="{{ asset('assets/imgs/theme/flag-fr.png') }}" alt="Français" />
+                                Français
+                            </a>
+                            <a class="dropdown-item" href="#"><img
+                                    src="{{ asset('assets/imgs/theme/flag-jp.png') }}" alt="Français" />日本語</a>
+                            <a class="dropdown-item" href="#"><img
+                                    src="{{ asset('assets/imgs/theme/flag-cn.png') }}" alt="Français" />中国人</a>
                         </div>
                     </li>
 
                     <li class="dropdown nav-item">
                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
                             aria-expanded="false"> <img class="img-xs rounded-circle"
-                                src="assets/imgs/people/avatar-2.png" alt="User" /></a>
+                                src="{{ asset('assets/imgs/people/avatar-2.png') }}" alt="User" /></a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
                             <a class="dropdown-item" href="#"><i
                                     class="material-icons md-perm_identity"></i>Edit Profile</a>
@@ -196,8 +213,16 @@
                             <a class="dropdown-item" href="#"><i
                                     class="material-icons md-help_outline"></i>Help center</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i
-                                    class="material-icons md-exit_to_app"></i>Logout</a>
+
+                            <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                <i class="material-icons md-exit_to_app"></i>
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -233,7 +258,11 @@
     <!-- Main Script -->
     <script src="{{ asset('assets/js/main.js?v=1.1') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/custom-chart.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/vendors/sweetalert2.js') }}"></script>
 
+
+
+    <script src="{{ asset('custom/delete.js') }}" type="text/javascript"></script>
     @yield('custom-js')
 
 </body>

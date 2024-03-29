@@ -5,21 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Seller extends Model
+class Customer extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-
     protected $fillable = [
-        'business_name',
+        'name',
         'slug',
         'mobile',
+
         'phone',
         'email',
-        'address',
-        'proprietor',
+        'business_name',
         'other_email',
+
+        'address',
         'desc'
     ];
 }

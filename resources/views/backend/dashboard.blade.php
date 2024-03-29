@@ -430,3 +430,6 @@
         </nav>
     </div>
 @endsection
+
+@section('custom-js')
+@endsection
