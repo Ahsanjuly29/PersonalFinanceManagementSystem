@@ -290,20 +290,21 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            <tr>
-                                <td colspan="10">
-                                    <button id="multiple_delete_btn" class="btn btn-xs btn-danger mr-2 d-none"
-                                        type="submit">
-                                        Delete all
-                                    </button>
+                            @if ($sellers->count() > 0)
+                                <tr>
+                                    <td colspan="13">
+                                        <button id="multiple_delete_btn" class="btn btn-xs btn-danger mr-2 d-none"
+                                            type="submit">
+                                            Delete all
+                                        </button>
 
-                                    <form action="{{ route('blade.seller.delete') }}" method="post"
-                                        id="delete_form">
-                                        @csrf @method('delete')
-                                    </form>
-                                </td>
-                            </tr>
-
+                                        <form action="{{ route('blade.seller.delete') }}" method="post"
+                                            id="delete_form">
+                                            @csrf @method('delete')
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

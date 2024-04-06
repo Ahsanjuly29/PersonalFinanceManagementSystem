@@ -30,9 +30,6 @@
             <div class="row">
                 <div class="col-md-10 offset-md-4 pb-4">
                     <p class="feedback-fadeout">
-                        @if ($errors->any())
-                            {{ implode('', $errors->all('<div>:message</div>')) }}
-                        @endif
                         @if (session('success'))
                             <span class="feedback d-block text-success fw-bold">
                                 {{ session('success') }}
@@ -51,8 +48,9 @@
                         @csrf
                         <div class="mb-4">
                             <label for="name" class="form-label">Customer Name</label>
-                            <input type="name" id="name" placeholder="Customer Name" class="form-control"
-                                name="name" value="{{ old('name') ?? '' }}" />
+                            <input type="name" id="name" placeholder="Customer Name"
+                                class="form-control @error('name') is-invalid @enderror" name="name"
+                                value="{{ old('name') ?? '' }}" />
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -61,8 +59,9 @@
                         </div>
                         <div class="mb-4">
                             <label for="mobile" class="form-label">Mobile</label>
-                            <input type="mobile" title="mobile" placeholder="mobile" class="form-control" name="mobile"
-                                id="mobile" value="{{ old('mobile') ?? '' }}" />
+                            <input type="mobile" title="mobile" placeholder="mobile"
+                                class="form-control @error('mobile') is-invalid @enderror" name="mobile" id="mobile"
+                                value="{{ old('mobile') ?? '' }}" />
                             @error('mobile')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -71,8 +70,9 @@
                         </div>
                         <div class="mb-4">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="phone" id="phone" title="phone" placeholder="phone" class="form-control"
-                                name="phone" value="{{ old('phone') ?? '' }}" />
+                            <input type="phone" id="phone" title="phone" placeholder="phone"
+                                class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                value="{{ old('phone') ?? '' }}" />
                             @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -289,20 +289,21 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            <tr>
-                                <td colspan="10">
-                                    <button id="multiple_delete_btn" class="btn btn-xs btn-danger mr-2 d-none"
-                                        type="submit">
-                                        Delete all
-                                    </button>
+                            @if ($customers->count() > 0)
+                                <tr>
+                                    <td colspan="13">
+                                        <button id="multiple_delete_btn" class="btn btn-xs btn-danger mr-2 d-none"
+                                            type="submit">
+                                            Delete all
+                                        </button>
 
-                                    <form action="{{ route('blade.customer.delete') }}" method="post"
-                                        id="delete_form">
-                                        @csrf @method('delete')
-                                    </form>
-                                </td>
-                            </tr>
-
+                                        <form action="{{ route('blade.customer.delete') }}" method="post"
+                                            id="delete_form">
+                                            @csrf @method('delete')
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

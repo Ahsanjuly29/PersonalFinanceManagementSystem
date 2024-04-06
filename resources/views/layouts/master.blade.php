@@ -15,7 +15,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/theme/favicon.svg') }}" />
     <!-- Template CSS -->
     <link href="{{ asset('assets/css/main.css?v=1.1') }}" rel="stylesheet" type="text/css" />
-
     @yield('custom-css')
 </head>
 
@@ -34,22 +33,42 @@
 
         <nav>
             <ul class="menu-aside">
-                <li class="menu-item active">
+                <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('dashboard') }}">
                         <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="{{ route('blade.seller.index') }}">
-                        <i class="icon material-icons md-store"></i>
-                        <span class="text">
-                            Seller
-                        </span>
+                <li class="menu-item has-submenu {{ request()->is('expense*') ? 'active' : '' }}">
+                    <a class="menu-link" href="page-products-list.html">
+                        <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Expense</span>
                     </a>
+                    <div class="submenu">
+                        <a class="menu-link {{ request()->is('expense/create') ? 'active' : '' }}"
+                            href="{{ route('blade.seller.index') }}">
+                            <i class="icon material-icons md-add_box"></i>
+                            <span class="text">
+                                Add new
+                            </span>
+                        </a>
+                        <a class="menu-link {{ request()->is('expense/index') ? 'active' : '' }}"
+                            href="{{ route('blade.seller.index') }}">
+                            <i class="icon material-icons md-add_box"></i>
+                            <span class="text">
+                                View List
+                            </span>
+                        </a>
+                    </div>
                 </li>
 
-                <li class="menu-item">
+                <li class="menu-item {{ request()->is('seller') ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('blade.seller.index') }}">
+                        <i class="icon material-icons md-store"></i>
+                        <span class="text">Seller</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->is('customer') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('blade.customer.index') }}">
                         <i class="icon material-icons md-store"></i>
                         <span class="text">
@@ -57,6 +76,25 @@
                         </span>
                     </a>
                 </li>
+
+
+                <li class="menu-item has-submenu">
+                    <a class="menu-link {{ str_contains(url()->current(), '/setting') ? 'active' : '' }}"
+                        href="#">
+                        <i class="icon material-icons md-settings"></i>
+                        <span class="text">Setting</span>
+                    </a>
+                    <div class="submenu {{ str_contains(url()->current(), '/payment-method') ? 'active' : '' }}"
+                        style="{{ str_contains(url()->current(), '/payment-method') ? 'display: block;' : '' }}">
+                        <a href="{{ route('blade.payment.method.index') }}">
+                            <i class="icon material-icons md-monetization_on"></i>
+                            <span class="text">
+                                Payment Method
+                            </span>
+                        </a>
+                    </div>
+                </li>
+
                 {{-- <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-products-list.html">
                         <i class="icon material-icons md-shopping_bag"></i>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\CustomerController;
+use App\Http\Controllers\backend\PaymentMethodController;
 use App\Http\Controllers\backend\SellerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    // return Hash::make(123456789);
     return view('welcome');
 });
 
@@ -44,5 +47,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::post('customer', 'store')->name('blade.customer.store');
         Route::put('customer/{id}', 'update')->name('blade.customer.update');
         Route::delete('customer', 'delete')->name('blade.customer.delete');
+    });
+
+    Route::prefix('setting')->group(function () {
+        Route::controller(PaymentMethodController::class)->group(function () {
+            Route::get('payment-method/{id?}', 'index')->name('blade.payment.method.index');
+            Route::post('payment-method', 'store')->name('blade.payment.method.store');
+            Route::put('payment-method/{id}', 'update')->name('blade.payment.method.update');
+            Route::delete('payment-method', 'delete')->name('blade.payment.method.delete');
+        });
     });
 });

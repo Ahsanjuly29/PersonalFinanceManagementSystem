@@ -26,8 +26,8 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
+        $data = $request->validated();
         try {
-            $data = $request->validated();
             $data["slug"] = getSlugName($request->business_name);
             Customer::create($data);
             return back()->withSuccess("Successfully Added New Customer's Info");
