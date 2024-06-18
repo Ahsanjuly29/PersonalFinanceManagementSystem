@@ -13,7 +13,10 @@ class SellerController extends Controller
     {
         $seller = Seller::query();
         if (!empty($request->search)) {
-            $seller->where('name', 'like', "%$request->search%")
+            $seller->where('business_name', 'like', "%$request->search%")
+                ->orWhere('slug', 'like', "%$request->search%")
+                ->orWhere('email', 'like', "%$request->search%")
+                ->orWhere('proprietor', 'like', "%$request->search%")
                 ->orWhere('slug', 'like', "%$request->search%");
         }
 

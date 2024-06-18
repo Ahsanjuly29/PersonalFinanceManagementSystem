@@ -44,16 +44,16 @@
                         <i class="icon material-icons md-shopping_bag"></i>
                         <span class="text">Expense</span>
                     </a>
-                    <div class="submenu">
-                        <a class="menu-link {{ request()->is('expense/create') ? 'active' : '' }}"
-                            href="{{ route('blade.seller.index') }}">
+                    <div class="submenu" style="{{ request()->is('expense*') ? 'display: block;' : '' }}">
+                        <a class="{{ request()->is('expense/create') ? 'active' : '' }}"
+                            href="{{ route('blade.expense.create') }}">
                             <i class="icon material-icons md-add_box"></i>
                             <span class="text">
                                 Add new
                             </span>
                         </a>
-                        <a class="menu-link {{ request()->is('expense/index') ? 'active' : '' }}"
-                            href="{{ route('blade.seller.index') }}">
+                        <a class="{{ request()->is('expense/index') ? 'active' : '' }}"
+                            href="{{ route('blade.expense.index') }}">
                             <i class="icon material-icons md-add_box"></i>
                             <span class="text">
                                 View List
@@ -62,13 +62,13 @@
                     </div>
                 </li>
 
-                <li class="menu-item {{ request()->is('seller') ? 'active' : '' }}">
+                <li class="menu-item {{ str_contains(url()->current(), '/seller') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('blade.seller.index') }}">
                         <i class="icon material-icons md-store"></i>
                         <span class="text">Seller</span>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('customer') ? 'active' : '' }}">
+                <li class="menu-item {{ str_contains(url()->current(), '/customer') ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('blade.customer.index') }}">
                         <i class="icon material-icons md-store"></i>
                         <span class="text">
@@ -77,16 +77,15 @@
                     </a>
                 </li>
 
-
-                <li class="menu-item has-submenu">
-                    <a class="menu-link {{ str_contains(url()->current(), '/setting') ? 'active' : '' }}"
-                        href="#">
+                <li class="menu-item has-submenu {{ str_contains(url()->current(), '/setting') ? 'active' : '' }}">
+                    <a class="menu-link" href="#">
                         <i class="icon material-icons md-settings"></i>
                         <span class="text">Setting</span>
                     </a>
-                    <div class="submenu {{ str_contains(url()->current(), '/payment-method') ? 'active' : '' }}"
+                    <div class="submenu"
                         style="{{ str_contains(url()->current(), '/payment-method') ? 'display: block;' : '' }}">
-                        <a href="{{ route('blade.payment.method.index') }}">
+                        <a href="{{ route('blade.payment.method.index') }}"
+                            class="{{ str_contains(url()->current(), '/payment-method') ? 'active' : '' }}">
                             <i class="icon material-icons md-monetization_on"></i>
                             <span class="text">
                                 Payment Method
@@ -297,8 +296,8 @@
     <script src="{{ asset('assets/js/main.js?v=1.1') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/custom-chart.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/vendors/sweetalert2.js') }}"></script>
-
-
+    <script src="https://cdn.tiny.cloud/1/z47o3qhw9g8oh60z2vwklsm58g6d3ol2bfnfvh393m0x9fbx/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
     <script src="{{ asset('custom/delete.js') }}" type="text/javascript"></script>
     @yield('custom-js')

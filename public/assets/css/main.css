@@ -645,8 +645,13 @@ b {
 }
 
 .menu-aside .menu-item.active .submenu a.active {
-    color: #3BB77E !important;
-    background-color: rgba(59, 183, 126, 0.4);
+    color: rgb(255 255 255) !important;
+    background-color: #6bc99d !important;
+}
+
+.dark .menu-aside .menu-item.active .submenu a.active {
+    color: #40c788 !important;
+    background-color: rgba(30, 94, 64, 0.61) !important;
 }
 
 .menu-aside .menu-link {
@@ -684,6 +689,19 @@ b {
     transition-duration: 0.3s;
     position: relative;
     margin-left: 5px;
+}
+
+.menu-aside .submenu a {
+    color: #292f46;
+    border-radius: 0.3rem;
+    position: relative;
+    line-height: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .menu-aside .submenu a:hover {
